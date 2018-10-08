@@ -1,7 +1,6 @@
 # qbo-oauth2.psgi
 ## Purpose: Demonstrates accessing Intuit API via OAuth2 and perl.
 ## License: Use at your own risk. If you like it maybe buy me a beer sometime.
-## Author: James D Bearden james@nontrivial.net
 ## Notes:
  * This code tries to minimize the use of libraries.
  * This code tries to maximize readability to better convey concepts.
