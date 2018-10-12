@@ -28,7 +28,7 @@ use URI::Escape qw(uri_escape);
  # When accessing the API the URL changes for production VS sandbox.
  # You can only use localhost for the redirect URL in the sandbox.
 # Hints:
- # apt-get install libplack-perl libplack-middleware-session-perl
+ # apt-get install libplack-perl libplack-middleware-session-perl libwww-perl
  # Add redirect URI on QBO app keys tab.
  # Update $Params below from QBO app keys tab.
  # plackup -r qbo-oauth2.psgi
@@ -37,7 +37,6 @@ use URI::Escape qw(uri_escape);
 my $Params = {
   AppClientID => '', # Get this from Intuit developer app settings.
   AppSecret => '',   # Get this from Intuit developer app settings.
-  RealmID => '',     # Get this from Intuit developer app settings.
   AppScope => 'com.intuit.quickbooks.accounting',
   RedirectURI => 'http://localhost:5000/qbo',
   TransID => 'SomeUniqueTransactionIdentifier'
@@ -108,8 +107,6 @@ sub HandleResponse {
 	    '<A HREF="/getdata">Get company data</A><BR>' .
 	    '<A HREF="/refresh">Refresh access token</A>';
 	} else { $Content = "Unable to get an access token from code!";}
-      } elsif ($Res->code == 401) {
-	$Content = 'Need to <A HREF="/refresh">refresh the access token</A>!';
       } else {
 	$Content = 'Got error code ' . $Res->code . ' (' . $Res->message .
 	  ') from Intuit when asking for access token!';
